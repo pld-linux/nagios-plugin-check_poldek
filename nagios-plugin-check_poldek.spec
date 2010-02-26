@@ -1,6 +1,6 @@
 %define		commit	cbc143d
 %define		plugin	check_poldek
-Summary:	Nagios plugin to check PLD updates
+Summary:	Nagios plugin to check PLD Linux updates
 Summary(pl.UTF_8):	Wtyczka Nagiosa sprawdzająca aktualizacje PLD
 Name:		nagios-plugin-%{plugin}
 Version:	0.1
@@ -18,7 +18,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		plugindir	%{_prefix}/lib/nagios/plugins
 
 %description
-Nagios plugin to check PLD updates.
+Nagios plugin to check PLD Linux updates.
 
 %description -l pl.UTF-8
 Wtyczka Nagiosa sprawdzająca aktualizacje PLD.
