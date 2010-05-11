@@ -13,6 +13,7 @@ BuildRequires:	rpmbuild(macros) >= 1.552
 Requires:	nagios-common
 Requires:	python-modules
 Requires:	grep
+Requires:	poldek
 Requires:	sed
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
