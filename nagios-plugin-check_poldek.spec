@@ -13,6 +13,7 @@ Source0:	http://github.com/pawelz/nagios-check_poldek/tarball/v%{version}/%{name
 URL:		http://github.com/pawelz/nagios-check_poldek
 BuildRequires:	rpmbuild(macros) >= 1.552
 Requires:	nagios-common
+Requires:	python-modules
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
