@@ -12,6 +12,8 @@ URL:		http://github.com/pawelz/nagios-check_poldek
 BuildRequires:	rpmbuild(macros) >= 1.552
 Requires:	nagios-common
 Requires:	python-modules
+Requires:	grep
+Requires:	sed
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -33,7 +35,7 @@ cat > nagios.cfg <<'EOF'
 # %{plugin}
 define command {
 	command_name    %{plugin}
-	command_line    %{plugindir}/%{plugin} --cache /var/cache/check_poldek -e $ARG1$ -w $ARG2$
+	command_line    %{plugindir}/%{plugin} --cache /var/cache/check_poldek -c $ARG1$ -w $ARG2$
 }
 EOF
 
