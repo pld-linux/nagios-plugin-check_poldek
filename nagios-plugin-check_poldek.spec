@@ -1,18 +1,15 @@
 # TODO
-# - use standard -w, --warning; -c, --critical command line args
-# - add support for cachedir arguments
 # - add support for specifying repo names via -n, --sn
-%define		commit	cbc143d
 %define		plugin	check_poldek
 Summary:	Nagios plugin to check PLD Linux updates
 Summary(pl.UTF_8):	Wtyczka Nagiosa sprawdzająca aktualizacje systemu PLD linux
 Name:		nagios-plugin-%{plugin}
-Version:	0.1
-Release:	0.6
+Version:	0.2
+Release:	0.1
 License:	MIT
 Group:		Networking
-Source0:	http://github.com/pawelz/nagios-check_poldek/tarball/v0.1/%{name}.tar.gz
-# Source0-md5:	3d3d829f19d31eeb3dba1037273d860f
+Source0:	http://github.com/pawelz/nagios-check_poldek/tarball/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	9cd3838772a47c1941a8ae7f16bdc925
 URL:		http://github.com/pawelz/nagios-check_poldek
 BuildRequires:	rpmbuild(macros) >= 1.552
 Requires:	nagios-common
@@ -29,20 +26,21 @@ Nagios plugin to check PLD Linux updates.
 Wtyczka Nagiosa sprawdzająca aktualizacje systemu PLD linux.
 
 %prep
-%setup -q -n pawelz-nagios-%{plugin}-%{commit}
+%setup -qc
+mv */* .
 
 cat > nagios.cfg <<'EOF'
 # Usage:
 # %{plugin}
 define command {
 	command_name    %{plugin}
-	command_line    %{plugindir}/%{plugin} -e $ARG1$ -w $ARG2$
+	command_line    %{plugindir}/%{plugin} --cache /var/cache/check_poldek -e $ARG1$ -w $ARG2$
 }
 EOF
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{plugindir}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{plugindir},/var/cache/check_poldek}
 install -p %{plugin}.py $RPM_BUILD_ROOT%{plugindir}/%{plugin}
 cp -a nagios.cfg $RPM_BUILD_ROOT%{_sysconfdir}/%{plugin}.cfg
 
@@ -59,3 +57,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(640,root,nagios) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{plugin}.cfg
 %attr(755,root,root) %{plugindir}/%{plugin}
+%dir %attr(775,root,nagios) /var/cache/check_poldek
