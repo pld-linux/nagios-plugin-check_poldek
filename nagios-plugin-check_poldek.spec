@@ -1,11 +1,11 @@
 # TODO
 # - add support for specifying repo names via -n, --sn
 %define		plugin	check_poldek
-Summary:	Nagios plugin to check PLD Linux updates
-Summary(pl.UTF_8):	Wtyczka Nagiosa sprawdzająca aktualizacje systemu PLD linux
+Summary:	Nagios plugin to check updates of poldek based systems
+Summary(pl.UTF_8):	Wtyczka Nagiosa sprawdzająca aktualizacje systemów używających poldka
 Name:		nagios-plugin-%{plugin}
 Version:	0.2
-Release:	0.1
+Release:	1
 License:	MIT
 Group:		Networking
 Source0:	http://github.com/pawelz/nagios-check_poldek/tarball/v%{version}/%{name}-%{version}.tar.gz
@@ -20,10 +20,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		plugindir	%{_prefix}/lib/nagios/plugins
 
 %description
-Nagios plugin to check PLD Linux updates.
+Nagios plugin to check updates of poldek based systems.
 
 %description -l pl.UTF-8
-Wtyczka Nagiosa sprawdzająca aktualizacje systemu PLD linux.
+Wtyczka Nagiosa sprawdzająca aktualizacje systemów używających poldka.
 
 %prep
 %setup -qc
