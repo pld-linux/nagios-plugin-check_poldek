@@ -9,6 +9,7 @@ Group:		Networking
 Source0:	http://github.com/pawelz/nagios-check_poldek/tarball/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	52eb9d732acb630b4e97f7032532c6a4
 URL:		http://github.com/pawelz/nagios-check_poldek
+BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.552
 Requires:	grep
 Requires:	nagios-common
