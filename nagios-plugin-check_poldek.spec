@@ -1,6 +1,6 @@
 %define		plugin	check_poldek
 Summary:	Nagios plugin to check updates of poldek based systems
-Summary(pl.UTF_8):	Wtyczka Nagiosa sprawdzająca aktualizacje systemów używających poldka
+Summary(pl.UTF-8):	Wtyczka Nagiosa sprawdzająca aktualizacje systemów używających poldka
 Name:		nagios-plugin-%{plugin}
 Version:	0.5
 Release:	1
