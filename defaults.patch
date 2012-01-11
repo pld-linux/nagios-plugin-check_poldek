@@ -1,0 +1,13 @@
+--- nagios-plugin-check_poldek-0.6/check_poldek.py	2012-01-11 21:02:58.516032428 +0200
++++ nagios-plugin-check_poldek-0.6/check_poldek.py	2012-01-11 21:05:21.988515855 +0200
+@@ -34,8 +34,8 @@
+ 		"errorLevel":	10,
+ 		"warningLevel":	5,
+ 		"verbose":		False,
+-		"sources":		[],
+-		"cache":		"/tmp/check_poldek",
++		"sources":		@repos@,
++		"cache":		"/var/cache/check_poldek",
+ 		"extraArgs":	[],
+ }
+ 
