@@ -8,6 +8,7 @@ License:	MIT
 Group:		Networking
 Source0:	http://github.com/pawelz/nagios-check_poldek/tarball/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	f1b67d7640f1c1558e6e99838b66a331
+Source1:	%{plugin}.cfg
 URL:		http://github.com/pawelz/nagios-check_poldek
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.552
@@ -33,20 +34,13 @@ Wtyczka Nagiosa sprawdzająca aktualizacje systemów używających poldka.
 %setup -qc
 mv */* .
 
-cat > nagios.cfg <<'EOF'
-# Usage:
-# %{plugin}
-define command {
-	command_name    %{plugin}
-	command_line    %{plugindir}/%{plugin} --cache %{cachedir} -c $ARG1$ -w $ARG2$
-}
-EOF
+%{__sed} -i -e 's,/tmp/check_poldek,%{cachedir},' %{plugin}.py
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{plugindir},%{cachedir}}
 install -p %{plugin}.py $RPM_BUILD_ROOT%{plugindir}/%{plugin}
-cp -a nagios.cfg $RPM_BUILD_ROOT%{_sysconfdir}/%{plugin}.cfg
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/%{plugin}.cfg
 
 %clean
 rm -rf $RPM_BUILD_ROOT
