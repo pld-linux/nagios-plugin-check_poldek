@@ -3,12 +3,11 @@ Summary:	Nagios plugin to check updates of poldek based systems
 Summary(pl.UTF-8):	Wtyczka Nagiosa sprawdzająca aktualizacje systemów używających poldka
 Name:		nagios-plugin-%{plugin}
 Version:	0.6
-Release:	1
+Release:	2
 License:	MIT
 Group:		Networking
-#Source0:	http://github.com/pawelz/nagios-check_poldek/tarball/v%{version}/%{name}-%{version}.tar.gz
-Source0:	https://github.com/glensc/nagios-check_poldek/tarball/master/%{plugin}-%{version}.tgz
-# Source0-md5:	fba5849a184ec310e018dd2ead225647
+Source0:	http://github.com/pawelz/nagios-check_poldek/tarball/master/%{plugin}-%{version}.tgz
+# Source0-md5:	b6e6167b3b0a80e417e66de9e2c964c9
 Source1:	%{plugin}.cfg
 Patch0:		defaults.patch
 URL:		http://github.com/pawelz/nagios-check_poldek
