@@ -2,12 +2,12 @@
 Summary:	Nagios plugin to check updates of poldek based systems
 Summary(pl.UTF-8):	Wtyczka Nagiosa sprawdzająca aktualizacje systemów używających poldka
 Name:		nagios-plugin-%{plugin}
-Version:	0.7.1
-Release:	2
+Version:	0.8
+Release:	1
 License:	MIT
 Group:		Networking
 Source0:	http://github.com/pawelz/nagios-check_poldek/tarball/v%{version}/%{plugin}-%{version}.tgz
-# Source0-md5:	453df2b416ad91e4a1ee1cfa4fb7f841
+# Source0-md5:	0ee3a35c35c2f2ec16c001ff16cac0e2
 Source1:	%{plugin}.cfg
 Patch0:		defaults.patch
 URL:		http://github.com/pawelz/nagios-check_poldek
@@ -47,12 +47,6 @@ cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/%{plugin}.cfg
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%post
-perms=$(ls -l /var/lib/rpm/Packages | awk '{print $1}' | sed -e 's/[^r]//g')
-if [ $perms != rrr ]; then
-	echo >&2 "WARNING: /var/lib/rpm/Packages not world readable, plugin will likely fail to run"
-fi
 
 %triggerin -- nagios-nrpe
 %nagios_nrpe -a %{plugin} -f %{_sysconfdir}/%{plugin}.cfg
