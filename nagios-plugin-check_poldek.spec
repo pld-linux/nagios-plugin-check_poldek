@@ -3,7 +3,7 @@ Summary:	Nagios plugin to check updates of poldek based systems
 Summary(pl.UTF-8):	Wtyczka Nagiosa sprawdzająca aktualizacje systemów używających poldka
 Name:		nagios-plugin-%{plugin}
 Version:	0.8
-Release:	2
+Release:	3
 License:	MIT
 Group:		Networking
 Source0:	http://github.com/pawelz/nagios-check_poldek/tarball/v%{version}/%{plugin}-%{version}.tgz
@@ -13,16 +13,17 @@ Patch0:		defaults.patch
 URL:		http://github.com/pawelz/nagios-check_poldek
 BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.552
+BuildRequires:	rpmbuild(macros) >= 1.685
 Requires:	grep
 Requires:	nagios-common
 Requires:	poldek >= 0.30-1.rc3
 Requires:	python-modules
-Requires:	sed
+Requires:	sed >= 4.0
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/nagios/plugins
+%define		nrpeddir	/etc/nagios/nrpe.d
 %define		plugindir	%{_prefix}/lib/nagios/plugins
 %define		cachedir	/var/cache/check_poldek
 
@@ -41,9 +42,10 @@ mv */* .
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{plugindir},%{cachedir}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{nrpeddir},%{plugindir},%{cachedir}}
 install -p %{plugin}.py $RPM_BUILD_ROOT%{plugindir}/%{plugin}
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/%{plugin}.cfg
+touch $RPM_BUILD_ROOT%{nrpeddir}/%{plugin}.cfg
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -57,5 +59,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(640,root,nagios) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{plugin}.cfg
+%ghost %{nrpeddir}/%{plugin}.cfg
 %attr(755,root,root) %{plugindir}/%{plugin}
 %dir %attr(775,root,nagios) %{cachedir}
