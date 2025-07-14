@@ -37,7 +37,7 @@ Wtyczka Nagiosa sprawdzająca aktualizacje systemów używających poldka.
 %prep
 %setup -qc
 mv */* .
-%patch0 -p1
+%patch -P0 -p1
 
 %{__sed} -i -e "s,@repos@,['%{pld_release}']," %{plugin}.py
 
